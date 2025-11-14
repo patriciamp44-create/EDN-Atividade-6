@@ -1,0 +1,20 @@
+import requests
+
+def consultar_cotacao(moeda):
+    moeda = moeda.upper()
+    url = f"https://economia.awesomeapi.com.br/json/last/{moeda}-BRL"
+    
+    resposta = requests.get(url).json()
+    
+    chave = moeda + "BRL"
+    dados = resposta[chave]
+    
+    print(f"=== Cotação {moeda} para BRL ===")
+    print("Valor atual :", dados['bid'])
+    print("Máximo      :", dados['high'])
+    print("Mínimo      :", dados['low'])
+    print("Atualizado em:", dados['create_date'])
+
+# Programa principal
+moeda = input("Digite o código da moeda (ex: USD, EUR, GBP): ")
+consultar_cotacao(moeda)
